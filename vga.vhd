@@ -5,9 +5,9 @@ use IEEE.numeric_std.all;
 entity vga is
   port(
 	clock : in std_logic;
-    row : out unsigned(9 downto 0);  
-    col : out unsigned(9 downto 0); 
-    HSYNC : out std_logic;
+	row : out unsigned(9 downto 0);
+	col : out unsigned(9 downto 0);
+	HSYNC : out std_logic;
 	VSYNC: out std_logic
   );
 end vga;
