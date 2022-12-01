@@ -8,7 +8,7 @@ entity top is
     data : in std_logic;
     up : out std_logic;
     down : out std_logic;
-    start : out std_logic;
+    start : out std_logic
   );
 end top;
   
