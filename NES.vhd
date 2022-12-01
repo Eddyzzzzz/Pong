@@ -8,6 +8,7 @@ entity top is
     data : in std_logic;
     up : out std_logic;
     down : out std_logic;
+    start : out std_logic;
   );
 end top;
   
@@ -53,7 +54,9 @@ begin
       
   process (latch) begin
     if rising_edge(latch) then
-      LEDs <= output; 
+      up <= output(5); 
+      down <= output(6);
+      start <= output(2);
     end if;
   end process; 
       
