@@ -36,7 +36,7 @@ begin
             s2 <= s2;
         end if;
         
-        if s1 = "1010" or s2 = "1010" then
+        if s1 = "1010" or s2 = "1010" then -- reset when either player reach 10 points
             iswin <= '1';
             s1 <= "0000";
             s2 <= "0000";
