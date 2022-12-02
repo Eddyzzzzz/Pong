@@ -5,14 +5,13 @@ use IEEE.numeric_std.all;
 entity paddle is
     port(
       start : in std_logic;
+      clk : in std_logic;
       
       up1 : in std_logic;
       down1 : in std_logic;
       
       up2 : in std_logic;
       down2 : in std_logic;
-      
-      clk : in std_logic;
       
       row : in unsigned(9 downto 0);
       col : in unsigned(9 downto 0);
