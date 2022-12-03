@@ -25,21 +25,21 @@ begin
         
         if rising_edge(clk) then
             if state = '0' then
-                pad1  <= 10b"11110000";
-                pad2  <= 10b"11110000";
+                pad1  <= 10b"1101001";
+                pad2  <= 10b"1101001";
                 delay <= 21b"0";
             else
                 if delay = 21b"0" then
                     if p1Move(1) = '1' then
-                        pad1 <= pad1 + 10b"1" when pad1 < 413 else pad1;
+                        pad1 <= pad1 + 10b"1" when pad1 < 135 else pad1;
                     elsif p1Move(0) = '1' then
-                        pad1 <= pad1 + 10b"1111111111" when pad1 > 67 else pad1;
+                        pad1 <= pad1 + 10b"1111111111" when pad1 > 0 else pad1;
                     end if;
                     
                     if p2Move(1) = '1' then
-                        pad2 <= pad2 + 10b"1" when pad2 < 413 else pad2;
+                        pad2 <= pad2 + 10b"1" when pad2 < 135 else pad2;
                     elsif p2Move(0) = '1' then
-                        pad2 <= pad2 + 10b"1111111111" when pad2 > 67 else pad2;
+                        pad2 <= pad2 + 10b"1111111111" when pad2 > 0 else pad2;
                     end if;
                 end if;
                 delay <= delay + 21b"1";
