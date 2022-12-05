@@ -6,10 +6,11 @@ use std.textio.all;
 entity playground is
 port(
 
-    p1pos : out unsigned (9 downto 0);
-    p2pos : out unsigned (9 downto 0);
+    p1pos : in unsigned (9 downto 0);
+    p2pos : in unsigned (9 downto 0);
+    ballxpos : out unsigned(9 downto 0);
+    ballypos : out unsigned(9 downto 0);
     state : in std_logic;
-    reset: in std_logic;
     score: out std_logic_vector(1 downto 0);
     
     clk: in std_logic
@@ -18,21 +19,19 @@ end;
 
 architecture synth of playground is
 signal ballvel : std_logic_vector(1 downto 0);
-signal ballxpos : unsigned(9 downto 0);
-signal ballypos : unsigned(9 downto 0);
 signal interset : std_logic;
 
 begin
-    interset <= '1' when reset else
+    interset <= '1' when state else
     '1' when not score = "00" else '0';
 process (clk) 
     begin
     if rising_edge(clk) then
-        ballvel(0) <= '0' when reset else
+        ballvel(0) <= '0' when state else
         '1' when ballxpos = d"15" and ((ballypos > p1pos - d"135") and (ballypos < p1pos)) else
         '0' when ballxpos = d"625" and ((ballypos > p2pos - d"135") and (ballypos < p2pos)) else
         ballvel(0);
-        ballvel(1) <= '0' when reset else
+        ballvel(1) <= '0' when state else
         '1' when ballypos = "0000000000" else
         '0' when ballypos = 10d"480" else
         ballvel(1);
@@ -51,4 +50,7 @@ process (clk)
     end if;
 end process;
 
+--b <= not a;
+
 end;
+
