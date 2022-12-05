@@ -54,8 +54,8 @@ architecture synth of Top is
             latch1 : out std_logic;
             latch2 : out std_logic;
     
-            clk1 : out std_logic;
-            clk2 : out std_logic;
+            clock1 : out std_logic;
+            clock2 : out std_logic;
     
             data1 : in std_logic;
             data2 : in std_logic;
@@ -64,7 +64,7 @@ architecture synth of Top is
             nes2 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
 			
 			clk : in std_logic;
-            isStart : out std_logic
+            start : out std_logic
         );
     end component;
     
@@ -106,7 +106,7 @@ architecture synth of Top is
 	
     component VGA is 
         port(
-         clk : in std_logic;
+         clock : in std_logic;
         	row : out unsigned(9 downto 0);
         	col : out unsigned(9 downto 0);
         	HSYNC : out std_logic;
@@ -208,14 +208,14 @@ begin
         port map (
             data1 => nesIn1,
             data2 => nesIn2,
-            clk1 => nesClk1,
-            clk2 => nesClk2,
+            clock1 => nesClk1,
+            clock2 => nesClk2,
             latch1 => latch1,
             latch2 => latch2,
             nes1   => p1Move,
             nes2   => p2Move,
 			clk => clk,
-            isStart  => isStart
+            start  => isStart
         );
     
     padModule : Paddle
@@ -256,7 +256,7 @@ begin
 	
     VGAModule : VGA
         port map(
-            clk => clock,
+            clock => clock,
             HSYNC => HSYNC,
             VSYNC => VSYNC,
             row => row,
