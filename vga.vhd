@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 entity vga is
   port(
-	clock : in std_logic;
+	clk : in std_logic;
 	row : out unsigned(9 downto 0);
 	col : out unsigned(9 downto 0);
 	HSYNC : out std_logic;
@@ -19,9 +19,9 @@ signal curCol : unsigned(9 downto 0);
 
 begin
 
-	process(clock)
+	process(clk)
 	begin
-		if rising_edge(clock) then
+		if rising_edge(clk) then
 			if curCol = 10d"799" then
 				curCol <= 10d"0";
 				HSYNC <= '0';
