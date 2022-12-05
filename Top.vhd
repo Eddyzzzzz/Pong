@@ -106,7 +106,7 @@ architecture synth of Top is
 	
     component VGA is 
         port(
-         clock : in std_logic;
+         clk : in std_logic;
         	row : out unsigned(9 downto 0);
         	col : out unsigned(9 downto 0);
         	HSYNC : out std_logic;
@@ -256,7 +256,7 @@ begin
 	
     VGAModule : VGA
         port map(
-            clock => clock,
+            clk => clock,
             HSYNC => HSYNC,
             VSYNC => VSYNC,
             row => row,
