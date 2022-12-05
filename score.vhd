@@ -10,8 +10,8 @@ entity score is
       
       input : in std_logic_vector(1 downto 0);
       
-      seven1 : out std_logic_vector(3 downto 0);
-      seven2 : out std_logic_vector(3 downto 0);
+      seven1 : out unsigned(3 downto 0);
+      seven2 : out unsigend(3 downto 0);
       
       iswin : out std_logic
       );
