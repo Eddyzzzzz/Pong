@@ -4,6 +4,9 @@ use IEEE.numeric_std.all;
 
 entity Top is
 port(
+	pllCLK : in std_logic;
+	clock : out std_logic;
+
     -- NES
     nesIn1  : in std_logic;
     nesIn2  : in std_logic;
@@ -17,7 +20,7 @@ port(
     seg2    : out std_logic; 
     segDisp : out std_logic_vector(6 downto 0);
     
-    -- Data
+    -- Display
     HSYNC   : out std_logic;
     VSYNC   : out std_logic;
     rgb     : out std_logic_vector(5 downto 0)
@@ -27,7 +30,7 @@ end;
 architecture synth of Top is
     component HSOSC is 
 		generic (
-			CLKHF_DIV : String := "0b11"); -- Divide 48MHz clk by 2^N (0-3)	
+			CLKHF_DIV : String := "0b00"); -- Divide 48MHz clk by 2^N (0-3)	
 		port(
 			CLKHFPU : in std_logic := 'X'; -- Set to 1 to power up
 			CLKHFEN : in std_logic := 'X'; -- Set to 1 to enable output
@@ -59,12 +62,13 @@ architecture synth of Top is
     
             nes1 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
             nes2 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
-    
+			
+			clk : in std_logic;
             isStart : out std_logic
         );
     end component;
     
-    component PatternGen is 
+    component Pattern_Gen is 
         port(
             row : in unsigned(9 downto 0);  
             col : in unsigned(9 downto 0); 
@@ -91,9 +95,18 @@ architecture synth of Top is
         );
     end component;
     
+	component mypll is
+	port(
+		ref_clk_i: in std_logic;
+		rst_n_i: in std_logic;
+		outcore_o: out std_logic;
+		outglobal_o: out std_logic
+	);
+	end component;
+	
     component VGA is 
         port(
-            clk : in std_logic;
+         clk : in std_logic;
         	row : out unsigned(9 downto 0);
         	col : out unsigned(9 downto 0);
         	HSYNC : out std_logic;
@@ -146,7 +159,8 @@ architecture synth of Top is
     signal p2Score : unsigned(3 downto 0);
     signal row     : unsigned(9 downto 0);
     signal col     : unsigned(9 downto 0);
-    
+	
+	--signal clockPLL   : std_logic;
     signal clk     : std_logic;
     signal isStart : std_logic;
     signal isWin   : std_logic;
@@ -200,6 +214,7 @@ begin
             latch2 => latch2,
             nes1   => p1Move,
             nes2   => p2Move,
+			clk => clk,
             isStart  => isStart
         );
     
@@ -221,7 +236,7 @@ begin
             state => state
         );
     
-    patternGenModule : PatternGen
+    patternGenModule : Pattern_Gen
         port map(
             p1Pos => p1Pos,
             p2Pos => p2Pos,
@@ -231,10 +246,17 @@ begin
             col => col,
             rgb => rgb
         );
-    
+		
+    PllModule : mypll 
+		port map(
+			ref_clk_i => pllCLK,
+			rst_n_i => '1',
+			outcore_o => clock
+	);
+	
     VGAModule : VGA
         port map(
-            clk => clk,
+            clk => clock,
             HSYNC => HSYNC,
             VSYNC => VSYNC,
             row => row,

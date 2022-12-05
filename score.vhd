@@ -4,16 +4,16 @@ use IEEE.numeric_std.all;
 
 entity score is
     port(
-      clk : in std_logic;
-      
-    --   reset :in std_logic;
-      
-      input : in std_logic_vector(1 downto 0);
-      
-      seven1 : out unsigned(3 downto 0);
-      seven2 : out unsigend(3 downto 0);
-      
-      iswin : out std_logic
+		clk : in std_logic;
+		  
+		--   reset :in std_logic;
+		  
+		scored : in std_logic_vector(1 downto 0);
+
+		p1Score : out unsigned(3 downto 0);
+		p2Score : out unsigned(3 downto 0);
+
+		isWin : out std_logic
       );
 end score;
 
@@ -21,15 +21,15 @@ end score;
 
 architecture synth of score is
 
-signal s1 : unsigned(3 downto 0) := "0000";
-signal s2 : unsigned(3 downto 0) := "0000";
+signal s1 : unsigned(3 downto 0);
+signal s2 : unsigned(3 downto 0);
 
 begin
   process (clk) begin
     if (rising_edge(clk)) then
-        if input = "10" then
+        if scored = "10" then
             s1 <= s1 + '1';
-        elsif input = "01" then
+        elsif scored = "01" then
             s2 <= s2 + '1';
         else 
             s1 <= s1;
@@ -37,15 +37,15 @@ begin
         end if;
         
         if s1 = "1010" or s2 = "1010" then -- reset when either player reach 10 points
-            iswin <= '1';
+            isWin <= '1';
             s1 <= "0000";
             s2 <= "0000";
         else
-            iswin <= '0';
+            isWin <= '0';
         end if;
         
     end if;
   end process;
-  seven1 <= s1(3) & s1(2) & s1(1) & s1(0);
-  seven2 <= s2(3) & s2(2) & s2(1) & s2(0);
+  p1Score <= s1(3) & s1(2) & s1(1) & s1(0);
+  p2Score <= s2(3) & s2(2) & s2(1) & s2(0);
 end;

@@ -15,17 +15,18 @@ entity nes is
     nes1 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
     nes2 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
     
+	clk : in std_logic;
     start : out std_logic
   );
 end nes;
   
 architecture synth of nes is
-  component HSOSC is generic (
-    CLKHF_DIV : String := "0b00"); port(
-    CLKHFPU : in std_logic := 'X'; CLKHFEN : in std_logic := 'X'; CLKHF : out std_logic := 'X');
-  end component;
+--  component HSOSC is generic (
+--    CLKHF_DIV : String := "0b00"); port(
+--    CLKHFPU : in std_logic := 'X'; CLKHFEN : in std_logic := 'X'; CLKHF : out std_logic := 'X');
+--  end component;
   
-  signal clk : std_logic;
+--  signal clk : std_logic;
 
   -- 48 MHz * 25ms = 1200000 = 2^20
   signal counter : unsigned (20 downto 0) := 21d"0"; signal NESclk : std_logic;
@@ -39,11 +40,11 @@ architecture synth of nes is
 
 begin
   
-  clo : HSOSC
-  port map(
-  CLKHF => clk,
-  CLKHFEN => '1', CLKHFPU => '1'
-  );
+--  clo : HSOSC
+--  port map(
+--  CLKHF => clk,
+--  CLKHFEN => '1', CLKHFPU => '1'
+--  );
     
   process(clk) begin
     if rising_edge(clk) then

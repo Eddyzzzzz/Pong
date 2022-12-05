@@ -3,7 +3,7 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 use std.textio.all;
 
-entity playground is
+entity ball is
 port(
 
     p1pos : in unsigned (9 downto 0);
@@ -17,7 +17,7 @@ port(
 );
 end;
 
-architecture synth of playground is
+architecture synth of ball is
 signal ballvel : std_logic_vector(1 downto 0);
 signal interset : std_logic;
 
