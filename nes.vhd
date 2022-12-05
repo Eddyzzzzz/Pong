@@ -75,15 +75,15 @@ begin
       
   process (latch1) begin
     if rising_edge(latch1) then
-      nes1 <= output1(5) & output1(6); 
-      start1 <= output1(2);
+      nes1 <= output1(4) & output1(5); 
+      start1 <= output1(3);
     end if;
   end process; 
  
   process (latch2) begin
     if rising_edge(latch2) then
-      nes2 <= output2(5) & output2(6); 
-      start2 <= output2(2);
+      nes2 <= output2(4) & output2(5); 
+      start2 <= output2(3);
     end if;
   end process; 
       
