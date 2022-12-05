@@ -24,9 +24,9 @@ begin
     begin
         
         if rising_edge(clk) then
-            if state = '0' then
-                pad1  <= 10b"1101001";
-                pad2  <= 10b"1101001";
+            if state = '1' then
+                pad1  <= 10b"10100010";
+                pad2  <= 10b"10100010";
                 delay <= 21b"0";
             else
                 if delay = 21b"0" then
