@@ -46,6 +46,6 @@ begin
         
     end if;
   end process;
-  p1Score <= s1(3) & s1(2) & s1(1) & s1(0);
-  p2Score <= s2(3) & s2(2) & s2(1) & s2(0);
+  p1Score <= s1;
+  p2Score <= s2;
 end;
