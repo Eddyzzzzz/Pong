@@ -29,8 +29,8 @@ process (clk)
     if rising_edge(clk) then
 		if delay = 19b"0" then
 			ballvel(0) <= '0' when state else
-			'1' when xpos = d"15" and ((ypos > p1pos + d"135") and (ypos > p1pos)) else
-			'0' when xpos = d"625" and ((ypos > p2pos + d"135") and (ypos > p2pos)) else
+			'1' when xpos < 9d"15" and ((ypos < p1pos + d"135") and (ypos > p1pos)) else
+			'0' when xpos > 9d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos)) else
 			ballvel(0);
 			ballvel(1) <= '0' when state else
 			'1' when ypos = "0000000011" else
