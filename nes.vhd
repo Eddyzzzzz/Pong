@@ -29,7 +29,7 @@ architecture synth of nes is
 --  signal clk : std_logic;
 
   -- 48 MHz * 25ms = 1200000 = 2^20
-  signal counter : unsigned (20 downto 0) := 21d"0"; signal NESclk : std_logic;
+  signal counter : unsigned (19 downto 0) := 20d"0"; signal NESclk : std_logic;
   signal NEScount : unsigned (7 downto 0);
 
   signal output1 : std_logic_vector(7 downto 0):= 8d"0";

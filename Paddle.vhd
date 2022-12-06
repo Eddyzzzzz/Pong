@@ -34,16 +34,16 @@ begin
                         pad1 <= pad1 + 10b"1" when pad1 < 135 else pad1;
                     elsif p1Move(0) = '1' then
                         pad1 <= pad1 - 10b"1" when pad1 > 0 else pad1;
-					else 
-						pad1 <= pad1;
+					-- else 
+					-- 	pad1 <= pad1;
                     end if;
                     
                     if p2Move(1) = '1' then
                         pad2 <= pad2 + 10b"1" when pad2 < 135 else pad2;
                     elsif p2Move(0) = '1' then
                         pad2 <= pad2 - 10b"1" when pad2 > 0 else pad2;
-                    else 
-						pad2 <= pad2;
+                    -- else 
+					-- 	pad2 <= pad2;
 					end if;
 					
                 end if;

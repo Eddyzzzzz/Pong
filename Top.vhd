@@ -30,7 +30,7 @@ end;
 architecture synth of Top is
     component HSOSC is 
 		generic (
-			CLKHF_DIV : String := "0b00"); -- Divide 48MHz clk by 2^N (0-3)	
+			CLKHF_DIV : String := "0b01"); -- Divide 48MHz clk by 2^N (0-3)	
 		port(
 			CLKHFPU : in std_logic := 'X'; -- Set to 1 to power up
 			CLKHFEN : in std_logic := 'X'; -- Set to 1 to enable output
