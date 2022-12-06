@@ -87,6 +87,6 @@ begin
     end if;
   end process; 
       
-  start <= start1 or start2;
+  start <= not (not start1 or not start2);
       
 end;
