@@ -15,7 +15,7 @@ port(
 end;
     
 architecture synth of Paddle is
-    signal delay   : unsigned(20 downto 0);
+    signal delay   : unsigned(17 downto 0);
     signal pad1    : unsigned(9 downto 0);
     signal pad2    : unsigned(9 downto 0);
 begin
@@ -27,9 +27,9 @@ begin
             if state = '1' then
                 pad1  <= 10b"10100010";
                 pad2  <= 10b"10100010";
-                delay <= 21b"0";
+                delay <= 19b"0";
             else
-                if delay = 21b"0" then
+                if delay = 18b"0" then
                     if p1Move(1) = '1' then
                         pad1 <= pad1 + 10b"1" when pad1 < 135 else pad1;
                     elsif p1Move(0) = '1' then
@@ -42,7 +42,7 @@ begin
                         pad2 <= pad2 - 10b"1" when pad2 > 0 else pad2;
                     end if;
                 end if;
-                delay <= delay + 21b"1";
+                delay <= delay + 18b"1";
             end if;
                 
         end if;
