@@ -18,7 +18,7 @@ port(
 end;
 
 architecture synth of ball is
-signal ballvel : std_logic_vector(1 downto 0);
+signal ballvel : std_logic_vector(1 downto 0); --x, y
 signal interset : std_logic;
 signal delay    : unsigned(18 downto 0);
 begin
@@ -44,8 +44,8 @@ process (clk)
 				ypos+10d"1" when ballvel(1) else
 				ypos-10d"1";
 			
-			scored <= "01" when xpos = 10d"480" else
-			"10" when xpos = 10d"0" else
+			scored <= "01" when xpos > 10d"480" else
+			"10" when xpos < 10d"0" else
 			"00";
         end if;
 		delay <= delay + 19b"1";
