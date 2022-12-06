@@ -20,17 +20,17 @@ end;
 architecture synth of ball is
 signal ballvel : std_logic_vector(1 downto 0);
 signal interset : std_logic;
-signal delay    : unsigned(20 downto 0);
+signal delay    : unsigned(18 downto 0);
 begin
     interset <= '1' when state else
     '1' when not scored = "00" else '0';
 process (clk) 
     begin
     if rising_edge(clk) then
-		if delay = 21b"0" then
+		if delay = 19b"0" then
 			ballvel(0) <= '0' when state else
-			'1' when xpos = d"15" and ((ypos > p1pos - d"135") and (ypos < p1pos)) else
-			'0' when xpos = d"625" and ((ypos > p2pos - d"135") and (ypos < p2pos)) else
+			'1' when xpos = d"15" and ((ypos > p1pos + d"135") and (ypos > p1pos)) else
+			'0' when xpos = d"625" and ((ypos > p2pos + d"135") and (ypos > p2pos)) else
 			ballvel(0);
 			ballvel(1) <= '0' when state else
 			'1' when ypos = "0000000000" else
@@ -48,7 +48,7 @@ process (clk)
 			"10" when xpos = 10d"0" else
 			"00";
         end if;
-		delay <= delay + 21b"1";
+		delay <= delay + 19b"1";
     end if;
 end process;
 
