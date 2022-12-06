@@ -33,8 +33,8 @@ process (clk)
 			'0' when xpos = d"625" and ((ypos > p2pos + d"135") and (ypos > p2pos)) else
 			ballvel(0);
 			ballvel(1) <= '0' when state else
-			'1' when ypos = "0000000000" else
-			'0' when ypos = 10d"480" else
+			'1' when ypos = "0000000011" else
+			'0' when ypos = 10d"477" else
 			ballvel(1);
 			
 			xpos <= 10d"320" when interset or state else
