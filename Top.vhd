@@ -240,8 +240,8 @@ begin
         port map(
             p1Pos => p1Pos,
             p2Pos => p2Pos,
---            xPos => xPos,
---            yPos => yPos,
+            xPos => xPos,
+            yPos => yPos,
             row => row,
             col => col,
             rgb => rgb
