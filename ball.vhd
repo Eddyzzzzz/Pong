@@ -20,17 +20,19 @@ end;
 architecture synth of ball is
 signal ballvel : std_logic_vector(1 downto 0); --x, y
 signal interset : std_logic;
-signal delay    : unsigned(18 downto 0);
+signal delay    : unsigned(16 downto 0);
 begin
-    interset <= '1' when state else
-    '1' when not scored = "00" else '0';
+    
 process (clk) 
     begin
     if rising_edge(clk) then
-		if delay = 19b"0" then
+		interset <= '1' when (state = '1' or xpos < 10d"0" or xpos > 10d"640")
+					 else '0';
+		
+		if delay = 17b"0" then
 			ballvel(0) <= '0' when state else
-			'1' when xpos < 9d"15" and ((ypos < p1pos + d"135") and (ypos > p1pos)) else
-			'0' when xpos > 9d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos)) else
+			'1' when xpos < 10d"15" and ((ypos < p1pos + d"135") and (ypos > p1pos)) else
+			'0' when xpos > 10d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos)) else
 			ballvel(0);
 			ballvel(1) <= '0' when state else
 			'1' when ypos = "0000000011" else
@@ -38,17 +40,17 @@ process (clk)
 			ballvel(1);
 			
 			xpos <= 10d"320" when interset or state else
-				xpos+10d"1" when ballvel(0) else 
+				xpos+10d"1" when ballvel(0) = '1' else 
 				xpos-10d"1";
 			ypos <= 10d"240" when interset or state else
-				ypos+10d"1" when ballvel(1) else
+				ypos+10d"1" when ballvel(1) = '1' else
 				ypos-10d"1";
 			
 			scored <= "01" when xpos > 10d"480" else
 			"10" when xpos < 10d"0" else
 			"00";
         end if;
-		delay <= delay + 19b"1";
+		delay <= delay + 17b"1";
     end if;
 end process;
 

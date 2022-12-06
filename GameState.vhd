@@ -24,7 +24,7 @@ begin
 				currentState <= '1';
 				initial <= '1';
             elsif currentState = '1' then
-                currentState <= '0' when isStart = '1' else currentState;
+                currentState <= '0' when isStart = '0' else currentState;
             else 
                 currentState <= '1' when isWin   = '1' else currentState;
             end if;
