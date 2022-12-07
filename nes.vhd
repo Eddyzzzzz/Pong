@@ -3,6 +3,9 @@ use IEEE.std_logic_1164.all; use IEEE.numeric_std.all;
 
 entity nes is 
   port(
+	  
+    -- for all the outputs, press button -> '0', not press button -> '1'
+
     latch1 : out std_logic;
     latch2 : out std_logic;
     
