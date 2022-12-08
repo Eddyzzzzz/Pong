@@ -77,8 +77,11 @@ architecture synth of Top is
 			xPos : in unsigned(9 downto 0);
 			yPos : in unsigned(9 downto 0);
 			rgb : out std_logic_vector(5 downto 0);
+			
 			player : in std_logic;
-			state : in std_logic
+			state : in std_logic;
+			p1Score : out unsigned(3 downto 0);
+			p2Score : out unsigned(3 downto 0)
         );
     end component;
     
@@ -252,7 +255,9 @@ begin
 			col => col,
 			rgb => rgb,
 			player => lastWin,
-			state => state
+			state => state,
+			p1Score => p1Score,
+			p2Score => p2Score
         );
 		
     PllModule : mypll 

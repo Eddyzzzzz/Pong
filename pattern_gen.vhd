@@ -12,7 +12,9 @@ entity pattern_gen is
 	yPos : in unsigned(9 downto 0);
     rgb : out std_logic_vector(5 downto 0);
 	player : in std_logic;
-	state : in std_logic
+	state : in std_logic;
+	p1Score : in unsigned(3 downto 0);
+	p2Score : in unsigned(3 downto 0)
   );
 end pattern_gen;
 
@@ -41,22 +43,37 @@ begin
 		or (col-150 > 318 and col-150 < 322 and row mod 6 < 3) -- Dotted Center Line
 		or (row < 11 or row > 488) -- Top and bottom edges, else black
 		
-		-- NUMBERS: Start at Row > 15, Row < 21, col < 306 for right pixel (p1), col > 337 for left pixel (p2), 5 per pixel, 
---		or (p1 = 0 and ((row-9 > 15 and row-9 < 21) or (row-9 > 65 and row-9 < 71)) and col-150 < 301 and col-150 > 275)
---		or (p1 = 0 and ((row-9 > 20 and row-9 < 26) or (row-9 > 60 and row-9 < 66)) and col-150 < 306 and col-150 > 270)  --Whole row
---		or (p1 = 0 and row-9 > 25 and row-9 < 61 and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270)))
+		-- NUMBERS: Start at Row > 15, Row < 21, col < 306 for right pixel (p1), col > 337 for left pixel (p2), 5 per pixel, 		
+		or (((state = '1' and player = '0') or (state ='0' and p1Score = 1)) and row-9 > 15 and row-9 < 71 and col-150 < 296 and col-150 > 285)
+		or (((state = '1' and player = '0') or (state ='0' and p1Score = 1)) and row-9 > 20 and row-9 < 31 and col-150 < 286 and col-150 > 280)
+		or (((state = '1' and player = '0') or (state ='0' and p1Score = 1)) and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
 		
-		or (state = '1' and player = '0' and row-9 > 15 and row-9 < 61 and col-150 < 296 and col-150 > 285)
-		or (state = '1' and player = '0' and row-9 > 20 and row-9 < 31 and col-150 < 286 and col-150 > 280)
-		or (state = '1' and player = '0' and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
+		or (((state = '1' and player = '1') or (state ='0' and p2Score = 1)) and row-9 > 15 and row-9 < 71 and col-210 < 296 and col-210 > 285)
+		or (((state = '1' and player = '1') or (state ='0' and p2Score = 1)) and row-9 > 20 and row-9 < 31 and col-210 < 286 and col-210 > 280)
+		or (((state = '1' and player = '1') or (state ='0' and p2Score = 1)) and row-9 > 25 and row-9 < 31 and col-210 < 281 and col-210 > 275)
 		
-		or (state = '1' and player = '1' and row-9 > 15 and row-9 < 61 and col-210 < 296 and col-210 > 285)
-		or (state = '1' and player = '1' and row-9 > 20 and row-9 < 31 and col-210 < 286 and col-210 > 280)
-		or (state = '1' and player = '1' and row-9 > 25 and row-9 < 31 and col-210 < 281 and col-210 > 275)
+		or (state ='0' and p1Score = 0 and ((row-9 > 15 and row-9 < 21) or (row-9 > 65 and row-9 < 71)) and col-150 < 301 and col-150 > 275)
+		or (state ='0' and p1Score = 0 and ((row-9 > 20 and row-9 < 26) or (row-9 > 60 and row-9 < 66)) and col-150 < 306 and col-150 > 270)  --Whole row
+		or (state ='0' and p1Score = 0 and row-9 > 25 and row-9 < 61 and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270)))
+		
+		or (state ='0' and p2Score = 0 and ((row-9 > 15 and row-9 < 21) or (row-9 > 65 and row-9 < 71)) and col-210 < 301 and col-210 > 275)
+		or (state ='0' and p2Score = 0 and ((row-9 > 20 and row-9 < 26) or (row-9 > 60 and row-9 < 66)) and col-210 < 306 and col-210 > 270)  --Whole row
+		or (state ='0' and p2Score = 0 and row-9 > 25 and row-9 < 61 and ((col-210 < 306 and col-210 > 295) or (col-210 < 281 and col-210 > 270)))
 		
 		-- in progress
---		or ((p1=2 or p1=3 or p1=5 or p1=7 or p1=8 or p1=9)and row-9 > 15 and row-9 < 26 and col-150 > 275 and col-150 < 301) --top
---		or (p1 = 9 and row-9 > 20 and row-9 < 66 and col-150 > 295 and col-150 < 306) --top right
+		or (state ='0' and (p1Score = 2 or p1Score = 3) and ((row-9 > 15 and row-9 < 26) or (row-9 > 60 and row-9 < 71)) and col-150 > 275 and col-150 < 301) --top + bottom
+		or (state ='0' and (p1Score = 3 or p1Score = 4) and row-9 > 20 and row-9 < 66 and col-150 > 295 and col-150 < 306) --right
+		or (state ='0' and (p1Score = 2) and row-9 > 20 and row-9 < 41 and col-150 > 295 and col-150 < 306) --top right
+		or (state ='0' and (p1Score = 4) and row-9 > 20 and row-9 < 41 and col-150 > 270 and col-150 < 281) --top left
+		or (state ='0' and (p1Score = 2 or p1Score = 3 or p1Score = 4) and row-9 > 37 and row-9 < 48 and col-150 > 275 and col-150 < 301) --middle
+		or (state ='0' and (p1Score = 2) and row-9 > 45 and row-9 < 66 and col-150 > 270 and col-150 < 281) --bottom left
+		
+		or (state ='0' and (p2Score = 2 or p2Score = 3) and ((row-9 > 15 and row-9 < 26) or (row-9 > 60 and row-9 < 71)) and col-210 > 275 and col-210 < 301) --top + bottom
+		or (state ='0' and (p2Score = 3 or p2Score = 4) and row-9 > 20 and row-9 < 66 and col-210 > 295 and col-210 < 306) --right
+		or (state ='0' and (p2Score = 2) and row-9 > 20 and row-9 < 41 and col-210 > 295 and col-210 < 306) --top right
+		or (state ='0' and (p2Score = 4) and row-9 > 20 and row-9 < 41 and col-210 > 270 and col-210 < 281) --top left
+		or (state ='0' and (p2Score = 2 or p2Score = 3 or p2Score = 4) and row-9 > 37 and row-9 < 48 and col-210 > 275 and col-210 < 301) --middle
+		or (state ='0' and (p2Score = 2) and row-9 > 45 and row-9 < 66 and col-210 > 270 and col-210 < 281) --bottom left
 		
 --		or (p1 = 9 and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
 --		or (p1 = 9 and row-9 > 15 and row-9 < 61 and col-150 < 296 and col-150 > 285)
