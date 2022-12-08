@@ -32,7 +32,7 @@ begin
 			interset <= '1' when (state = '1' or xpos < 10d"0" or xpos > 10d"640")
 						 else '0';
 			if afterScore > 14b"0" then
-				afterScore <= afterScore - 14b"1";
+				afterScore <= afterScore - 14b"1000000";
 			elsif delay = 17b"0" then -- Slow down for humans
 				
 				-- Sets the x position of the ball
