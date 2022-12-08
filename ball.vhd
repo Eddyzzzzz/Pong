@@ -34,6 +34,17 @@ begin
 			if afterScore > 14b"0" then
 				afterScore <= afterScore - 14b"1";
 			elsif delay = 17b"0" then -- Slow down for humans
+				
+				-- Sets the x position of the ball
+				xpos <= 10d"320" when interset or state else
+					xpos+10d"1" when ballvel(0) = '1' else 
+					xpos-10d"1";
+				
+				-- Sets the y position of the bal
+				ypos <= 10d"240" when interset or state else
+					ypos+10d"1" when ballvel(1) = '1' else
+					ypos-10d"1";
+				
 				-- Choose which direction the ball goes
 					-- x direction
 				ballvel(0) <= '0' when state else
@@ -46,19 +57,17 @@ begin
 				'0' when ypos = 10d"477" else
 				ballvel(1);
 				
-				-- Sets the x position of the ball
-				xpos <= 10d"320" when interset or state else
-					xpos+10d"1" when ballvel(0) = '1' else 
-					xpos-10d"1";
 				
-				-- Sets the y position of the bal
-				ypos <= 10d"240" when interset or state else
-					ypos+10d"1" when ballvel(1) = '1' else
-					ypos-10d"1";
-					
 				-- Constrols the speed up
-				if (xpos < 10d"15" and ((ypos < p1pos + d"135") and (ypos > p1pos))) or (xpos > 10d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos))) then
+					-- Bounce First Paddle
+				if xpos < 10d"15" and ((ypos < p1pos + d"135") and (ypos > p1pos)) then
 					waitVal <= waitVal - 17d"1";
+					
+					-- Bounce Second Paddle
+				elsif xpos > 10d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos)) then
+					waitVal <= waitVal - 17b"1";
+					
+					-- If someone scored
 				elsif xpos < 10d"0" or xpos > 10d"640" then
 					waitVal <= 17b"11111111111111111";
 					afterScore <= 14b"11111111111111";
