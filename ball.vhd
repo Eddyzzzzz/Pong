@@ -61,11 +61,11 @@ begin
 				-- Constrols the speed up
 					-- Bounce First Paddle
 				if xpos < 10d"15" and ((ypos < p1pos + d"135") and (ypos > p1pos)) then
-					waitVal <= waitVal - 17d"1";
+					waitVal <= waitVal - 17b"100_0000_0000";
 					
 					-- Bounce Second Paddle
 				elsif xpos > 10d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos)) then
-					waitVal <= waitVal - 17b"10000000";
+					waitVal <= waitVal - 17b"100_0000_0000";
 					
 					-- If someone scored
 				elsif xpos < 10d"0" or xpos > 10d"640" then
