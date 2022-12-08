@@ -74,8 +74,8 @@ begin
 				end if;
 				
 				-- Check when someone scores
-				scored <= "01" when xpos > 10d"480" else
-				"10" when xpos < 10d"0" else
+				scored <= "01" when xpos >= 10d"639" else
+				"10" when xpos <= 10d"1" else
 				"00";
 			end if;
 			-- Go through the delay
