@@ -32,6 +32,7 @@ begin
 			interset <= '1' when (state = '1' or xpos < 10d"0" or xpos > 10d"640")
 						 else '0';
 			if afterScore > 14b"0" then
+				waitVal <= 17b"11111111111111111";
 				afterScore <= afterScore - 14b"1";
 			elsif delay = 17b"0" then -- Slow down for humans
 				
