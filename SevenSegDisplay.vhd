@@ -42,8 +42,8 @@ begin
             segments => output
         );
     
-    dispScore <= p1Score when counter(19) = '0' else p2score;
+    dispScore <= p1Score when counter(17) = '0' else p2score;
     
-    seg1 <= counter(19); -- Use seg1/2 to toggle anode/cathode; 
-    seg2 <= not counter(19);
+    seg1 <= counter(17); -- Use seg1/2 to toggle anode/cathode; 
+    seg2 <= not counter(17);
 end;
