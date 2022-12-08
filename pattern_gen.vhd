@@ -30,7 +30,7 @@ begin
 --	p2Pos <= 10d"180";
 --	xPos <= 10d"320";
 --	yPos <= 10d"240";
-	p1 <= 4b"0";
+--	p1 <= 4d"0";
 	
 	-- Make sure to minus 150 to any column calculation and 9 from any row calculation
 	rgb <= "000000" when (col < 150 or col > 795 or row < 10 or row > 489) else --Out of bounds area = black
@@ -41,17 +41,24 @@ begin
 		or (row < 11 or row > 488) -- Top and bottom edges, else black
 		
 		-- NUMBERS: Start at Row > 15, Row < 21, col < 306 for right pixel (p1), col > 337 for left pixel (p2), 5 per pixel, 
-		or (row-9 > 15 and row-9 < 21 and ((p1 = 0 or p1= 10)and col-150 < 301 and col-150 > 275))
-		or (row-9 > 20 and row-9 < 26 and ((p1 = 0 or p1= 10)and col-150 < 306 and col-150 > 270))
-		or (row-9 > 25 and row-9 < 31 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 30 and row-9 < 36 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 35 and row-9 < 41 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 40 and row-9 < 46 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 45 and row-9 < 51 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 50 and row-9 < 56 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 55 and row-9 < 61 and ((p1 = 0 or p1= 10)and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270))))
-		or (row-9 > 60 and row-9 < 66 and ((p1 = 0 or p1= 10)and col-150 < 306 and col-150 > 270))
-		or (row-9 > 65 and row-9 < 71 and ((p1 = 0 or p1= 10)and col-150 < 301 and col-150 > 275))) else "000000";
+--		or (p1 = 0 and ((row-9 > 15 and row-9 < 21) or (row-9 > 65 and row-9 < 71)) and col-150 < 301 and col-150 > 275)
+--		or (p1 = 0 and ((row-9 > 20 and row-9 < 26) or (row-9 > 60 and row-9 < 66)) and col-150 < 306 and col-150 > 270)  --Whole row
+--		or (p1 = 0 and row-9 > 25 and row-9 < 61 and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270)))
+		
+--		or (p1 = 1 and row-9 > 15 and row-9 < 61 and col-150 < 296 and col-150 > 285)
+--		or (p1 = 1 and row-9 > 20 and row-9 < 31 and col-150 < 286 and col-150 > 280)
+--		or (p1 = 1 and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
+		
+		-- in progress
+--		or ((p1=2 or p1=3 or p1=5 or p1=7 or p1=8 or p1=9)and row-9 > 15 and row-9 < 26 and col-150 > 275 and col-150 < 301) --top
+--		or (p1 = 9 and row-9 > 20 and row-9 < 66 and col-150 > 295 and col-150 < 306) --top right
+		
+--		or (p1 = 9 and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
+--		or (p1 = 9 and row-9 > 15 and row-9 < 61 and col-150 < 296 and col-150 > 285)
+--		or (p1 = 9 and row-9 > 20 and row-9 < 31 and col-150 < 286 and col-150 > 280)
+--		or (p1 = 9 and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
+		
+		) else "000000";
 
 -- Good luck!
 	

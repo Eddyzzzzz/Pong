@@ -17,7 +17,6 @@ end;
 architecture synth of SevenSegDisplay is
     signal counter   : unsigned(19 downto 0);
     signal dispScore : unsigned(3 downto 0);
-    signal output   : std_logic_vector(6 downto 0);
     
     component sevenSeg is 
         port(
@@ -39,7 +38,7 @@ begin
     disp : sevenSeg
         port map (
             S        => dispScore,
-            segments => output
+            segments => segDisp
         );
     
     dispScore <= p1Score when counter(17) = '0' else p2score;
