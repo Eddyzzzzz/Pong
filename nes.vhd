@@ -18,7 +18,8 @@ entity nes is
     nes1 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
     nes2 : out std_logic_vector(1 downto 0); --bit 1 : up; bit 2 : down
     
-	clk : in std_logic;
+    clk : in std_logic;
+	  
     start : out std_logic
   );
 end nes;
