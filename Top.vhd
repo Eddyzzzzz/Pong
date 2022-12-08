@@ -70,28 +70,31 @@ architecture synth of Top is
     
     component Pattern_Gen is 
         port(
-            row : in unsigned(9 downto 0);  
-            col : in unsigned(9 downto 0); 
-            p1Pos : in unsigned(9 downto 0);
-            p2Pos : in unsigned(9 downto 0);
-            xPos : in unsigned(9 downto 0);
-            yPos : in unsigned(9 downto 0);
-            rgb : out std_logic_vector(5 downto 0)
+			row : in unsigned(9 downto 0);  
+			col : in unsigned(9 downto 0); 
+			p1Pos : in unsigned(9 downto 0);
+			p2Pos : in unsigned(9 downto 0);
+			xPos : in unsigned(9 downto 0);
+			yPos : in unsigned(9 downto 0);
+			rgb : out std_logic_vector(5 downto 0);
+			player : in std_logic;
+			state : in std_logic
         );
     end component;
     
     component Score is 
         port(
-            clk : in std_logic;
-      
-            --   reset :in std_logic;
-              
-            scored : in std_logic_vector(1 downto 0);
-            
-            p1Score : out unsigned(3 downto 0);
-            p2Score : out unsigned(3 downto 0);
-            
-            isWin : out std_logic
+			clk : in std_logic;
+	  
+			--   reset :in std_logic;
+			  
+			scored : in std_logic_vector(1 downto 0);
+			
+			p1Score : out unsigned(3 downto 0);
+			p2Score : out unsigned(3 downto 0);
+			
+			isWin : out std_logic;
+			lastWin : out std_logic
         );
     end component;
     
@@ -165,6 +168,7 @@ architecture synth of Top is
     signal isStart : std_logic;
     signal isWin   : std_logic;
     signal state   : std_logic;
+	signal lastWin : std_logic;
     
     
 begin
@@ -188,11 +192,12 @@ begin
         
     scoreModule : Score
         port map(
-            clk => clk,
-            scored => scored,
-            p1Score => p1Score,
-            p2Score => p2Score,
-            isWin => isWin
+			clk => clk,
+			scored => scored,
+			p1Score => p1Score,
+			p2Score => p2Score,
+			isWin => isWin,
+			lastWin => lastWin
         );
     
     segDispModule : SevenSegDisplay
@@ -239,13 +244,15 @@ begin
     
     patternGenModule : Pattern_Gen
         port map(
-            p1Pos => p1Pos,
-            p2Pos => p2Pos,
-            xPos => xPos,
-            yPos => yPos,
-            row => row,
-            col => col,
-            rgb => rgb
+			p1Pos => p1Pos,
+			p2Pos => p2Pos,
+			xPos => xPos,
+			yPos => yPos,
+			row => row,
+			col => col,
+			rgb => rgb,
+			player => lastWin,
+			state => state
         );
 		
     PllModule : mypll 

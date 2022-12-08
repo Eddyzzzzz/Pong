@@ -10,7 +10,9 @@ entity pattern_gen is
 	p2Pos : in unsigned(9 downto 0);
 	xPos : in unsigned(9 downto 0);
 	yPos : in unsigned(9 downto 0);
-    rgb : out std_logic_vector(5 downto 0)
+    rgb : out std_logic_vector(5 downto 0);
+	player : in std_logic;
+	state : in std_logic
   );
 end pattern_gen;
 
@@ -21,8 +23,7 @@ architecture sim of pattern_gen is
 --signal p1Pos : unsigned(9 downto 0);
 --signal p2Pos : unsigned(9 downto 0);
 --signal xPos : unsigned(9 downto 0);
---signal yPos : unsigned(9 downto 0);
-signal p1 : unsigned (3 downto 0);
+--signal yPos : unsigned(9 downto 0);--signal player : std_logic;
 
 begin
 	-- For Testing screen.
@@ -45,9 +46,13 @@ begin
 --		or (p1 = 0 and ((row-9 > 20 and row-9 < 26) or (row-9 > 60 and row-9 < 66)) and col-150 < 306 and col-150 > 270)  --Whole row
 --		or (p1 = 0 and row-9 > 25 and row-9 < 61 and ((col-150 < 306 and col-150 > 295) or (col-150 < 281 and col-150 > 270)))
 		
---		or (p1 = 1 and row-9 > 15 and row-9 < 61 and col-150 < 296 and col-150 > 285)
---		or (p1 = 1 and row-9 > 20 and row-9 < 31 and col-150 < 286 and col-150 > 280)
---		or (p1 = 1 and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
+		or (state = '1' and player = '0' and row-9 > 15 and row-9 < 61 and col-150 < 296 and col-150 > 285)
+		or (state = '1' and player = '0' and row-9 > 20 and row-9 < 31 and col-150 < 286 and col-150 > 280)
+		or (state = '1' and player = '0' and row-9 > 25 and row-9 < 31 and col-150 < 281 and col-150 > 275)
+		
+		or (state = '1' and player = '1' and row-9 > 15 and row-9 < 61 and col-210 < 296 and col-210 > 285)
+		or (state = '1' and player = '1' and row-9 > 20 and row-9 < 31 and col-210 < 286 and col-210 > 280)
+		or (state = '1' and player = '1' and row-9 > 25 and row-9 < 31 and col-210 < 281 and col-210 > 275)
 		
 		-- in progress
 --		or ((p1=2 or p1=3 or p1=5 or p1=7 or p1=8 or p1=9)and row-9 > 15 and row-9 < 26 and col-150 > 275 and col-150 < 301) --top

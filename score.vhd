@@ -13,7 +13,8 @@ entity score is
 	p1Score : out unsigned(3 downto 0);
 	p2Score : out unsigned(3 downto 0);
 
-	isWin : out std_logic
+	isWin : out std_logic;
+	lastWin : out std_logic
       );
 end score;
 
@@ -49,12 +50,14 @@ begin
 			reset <= '0';  
         end if;
         
-        if s1 = "1010" or s2 = "1010" then -- reset when either player reach 10 points
-            isWin <= '1';
-            s1 <= "0000";
-            s2 <= "0000";
+        if s1 = 5 or s2 = 5 then -- reset when either player reach 10 points
+			isWin <= '1';
+			lastWin <= '0' when s2 = 5 else '1';
+			s1 <= "0000";
+			s2 <= "0000";
         else
-            isWin <= '0';
+			isWin <= '0';
+			lastWin <= lastWin;
         end if;
         
     end if;
