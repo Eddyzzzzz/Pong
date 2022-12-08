@@ -177,12 +177,13 @@ begin
     
     ballModule : Ball
         port map(
-            clk => clk,
-            p1Pos => p1Pos,
-            p2Pos => p2Pos,
-            state => state,
-            xPos => xPos,
-            yPos => yPos
+			clk => clk,
+			p1Pos => p1Pos,
+			p2Pos => p2Pos,
+			state => state,
+			xPos => xPos,
+			yPos => yPos,
+			scored => scored
         );
         
     scoreModule : Score
