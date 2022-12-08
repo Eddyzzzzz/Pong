@@ -74,7 +74,6 @@ begin
     end if;
   end process;
       
-
   NESclk <= counter(8);
 
   -- make nes counter
