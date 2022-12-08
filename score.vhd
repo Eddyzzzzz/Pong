@@ -29,25 +29,24 @@ begin
   process (clk) begin
     if (rising_edge(clk)) then
 
-        if scored = "10" then		
-	    if (reset = '1') then
-		s1 <= s1;
-	    else      	
+		if scored = "10" then		
+			if (reset = '1') then
+				s1 <= s1;
+			else      	
                 s1 <= s1 + '1';
-		reset <= '1';
-	    end if;
+			reset <= '1';
+			end if;
 		    
         elsif scored = "01" then
-	    if (reset = '1') then
-		s2 <= s2;
-	    else      	
+			if (reset = '1') then
+				s2 <= s2;
+			else      	
                 s2 <= s2 + '1';
-		reset <= '1';
-	    end if;
-		    
+			reset <= '1';
+			end if;
+		  
         else 
-	    reset <= '0';
-		    
+			reset <= '0';  
         end if;
         
         if s1 = "1010" or s2 = "1010" then -- reset when either player reach 10 points
