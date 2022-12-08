@@ -32,7 +32,7 @@ begin
 			interset <= '1' when (state = '1' or xpos < 10d"0" or xpos > 10d"640")
 						 else '0';
 			if afterScore > 14b"0" then
-				afterScore <= afterScore - 14b"1000000";
+				afterScore <= afterScore - 14b"1";
 			elsif delay = 17b"0" then -- Slow down for humans
 				
 				-- Sets the x position of the ball
@@ -65,7 +65,7 @@ begin
 					
 					-- Bounce Second Paddle
 				elsif xpos > 10d"625" and ((ypos < p2pos + d"135") and (ypos > p2pos)) then
-					waitVal <= waitVal - 17b"1";
+					waitVal <= waitVal - 17b"10000000";
 					
 					-- If someone scored
 				elsif xpos < 10d"0" or xpos > 10d"640" then
