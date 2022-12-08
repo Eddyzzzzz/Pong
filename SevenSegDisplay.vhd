@@ -16,8 +16,8 @@ end;
     
 architecture synth of SevenSegDisplay is
     signal counter   : unsigned(19 downto 0);
-    signal output1   : std_logic_vector(6 downto 0);
-    signal output2   : std_logic_vector(6 downto 0);
+    signal dispScore : unsigned(3 downto 0);
+    signal output   : std_logic_vector(6 downto 0);
     
     component sevenSeg is 
         port(
@@ -36,19 +36,14 @@ begin
         end if;
     end process;
     
-    seg1Disp : sevenSeg
+    disp : sevenSeg
         port map (
-            S        => p1Score,
-            segments => output1
+            S        => dispScore,
+            segments => output
         );
     
-    seg2Disp : sevenSeg
-        port map (
-            S        => p2Score,
-            segments => output2
-        );
+    dispScore <= p1Score when counter(19) = '0' else p2score;
     
-    segDisp <= output1 when counter(19) = '0' else output2;
-    seg1 <= counter(19);
+    seg1 <= counter(19); -- Use seg1/2 to toggle anode/cathode; 
     seg2 <= not counter(19);
 end;
