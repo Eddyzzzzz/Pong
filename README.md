@@ -1,4 +1,4 @@
-Tufts University ES4 final project -- Pong!
+A retro game Pong! implemented by VHDL on a UPduino FPGA.
 
 by Alex, Eddy, Jane, Matthew
 
