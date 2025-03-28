@@ -4,7 +4,7 @@ This project implements a 2-player Pong game on an FPGA using NES controllers. P
 
 ## Domument
 
-[Pong]([https://youtu.be/e-_BXjlFt5c](https://narrow-theory-18d.notion.site/NES-controller-Pong-on-FPGA-1b9436c3d41a8186a3e4e2e46e7fc9a8?pvs=74))
+[Pong](https://narrow-theory-18d.notion.site/NES-controller-Pong-on-FPGA-1b9436c3d41a8186a3e4e2e46e7fc9a8?pvs=74)
 
 ## Overview
 
